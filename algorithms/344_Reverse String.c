@@ -1,3 +1,18 @@
+/*************************************************************************************** 
+Source : https://leetcode.com/problems/reverse-string/description/
+Author : Jing 
+Date   : 2018/6/6
+ 
+Description:
+  Write a function that takes a string as input and returns the string reversed.
+
+Example:
+  Given s = "hello", return "olleh".
+
+Complexity:
+    Time:O(n)
+    Space:O(1)
+***************************************************************************************/
 char* reverseString(char* s) {
      int l = 0;
      int r = strlen(s)-1;
@@ -14,6 +29,3 @@ char* reverseString(char* s) {
  
      return s;
 }
-
-//t:O( (1/2) n)
-//s:O( 1 )
