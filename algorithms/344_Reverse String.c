@@ -14,3 +14,6 @@ char* reverseString(char* s) {
  
      return s;
 }
+
+//t:O( (1/2) n)
+//s:O( 1 )
