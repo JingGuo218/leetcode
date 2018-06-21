@@ -28,37 +28,36 @@ Beats:32.75%
  */
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
     int carry=0;
-    int operatorA,operatorB;
     
-    struct ListNode* retNode = NULL;
-    struct ListNode* curNode = NULL;
+    struct ListNode* retNode = l1;
+    struct ListNode* l1PretNode;
+    struct ListNode* l2head = l2;
     
     while( (l1!=NULL)||(l2!=NULL)||(carry!=0) )
-    {
-        if (curNode == NULL) curNode = malloc(sizeof(struct ListNode));
-        else {
-            curNode->next = malloc(sizeof(struct ListNode));
-            curNode = curNode->next;
+    {    
+        if (l1 == NULL) {
+            l1PretNode -> next = l2head; //malloc(sizeof(struct ListNode));
+            l2head = l2head->next;
+            l1 = l1PretNode -> next;
+            l1->next=NULL;
+            l1->val=0;
         }
         
-        curNode->next=NULL;
-            
-        if (retNode == NULL) retNode=curNode;
-            
-        if (l1 == NULL) operatorA=0;
-        else operatorA = l1->val;
-        if (l2 == NULL) operatorB=0;
-        else operatorB = l2->val;
-        curNode->val = operatorA + operatorB + carry;
+        if (l2 == NULL) l1->val += carry;  
+        else l1->val += l2->val + carry; 
         
-        
-        if (curNode->val > 9) carry = 1;
+        if (l1->val > 9){
+            carry = 1;
+            l1->val -= 10;
+        }
         else carry = 0;  
-        curNode->val %= 10;
+          
+        l1PretNode = l1;
+        l1 = l1->next;
         
-        if (l1 != NULL) l1 = l1->next;
         if (l2 != NULL) l2 = l2->next;
     }
+    
         
     return retNode;
 }
