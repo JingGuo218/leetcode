@@ -14,9 +14,9 @@ Example:
 
 Complexity:
     Time:O(n)
-    Space:O(n)
+    Space:O(1)
 
-Beats:32.75%
+Beats:54% (not accurate, test time too short)
 ***************************************************************************************/
 
 /**
@@ -31,13 +31,13 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
     
     struct ListNode* retNode = l1;
     struct ListNode* l1PretNode;
-    struct ListNode* l2head = l2;
+    struct ListNode* l2UsedToPutSum = l2;
     
     while( (l1!=NULL)||(l2!=NULL)||(carry!=0) )
     {    
-        if (l1 == NULL) {
-            l1PretNode -> next = l2head; //malloc(sizeof(struct ListNode));
-            l2head = l2head->next;
+        if (l1 == NULL) {//l1 node space is not enough to put sum, using l2 node s
+            l1PretNode -> next = l2UsedToPutSum; 
+            l2UsedToPutSum = l2UsedToPutSum->next;
             l1 = l1PretNode -> next;
             l1->next=NULL;
             l1->val=0;
