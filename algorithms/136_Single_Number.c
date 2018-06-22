@@ -32,9 +32,9 @@ int singleNumber(int* nums, int numsSize) {
         return nums[0];
     }
   
-    while(numsSize > 1)
+    while((--numsSize)!=0)
     {
-        nums[0] ^= nums[--numsSize] ;
+        nums[0] ^= nums[numsSize] ;
     }
     
     return nums[0];
