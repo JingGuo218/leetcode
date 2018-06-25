@@ -16,7 +16,7 @@ Complexity:
 
 Beats:100% 
 
-Approach: Recursive
+Approach: Recursive DFS
 
 ***************************************************************************************/
 
@@ -29,28 +29,11 @@ Approach: Recursive
  * };
  */
 
-int recurMaxDepth(int depth, struct TreeNode* node){
-    int retFromLeftTree=0;
-    int retFromRightTree=0;
-     
-    if( (node->left == NULL)&& (node->right == NULL)) {
-        return depth;
-    }else if (node->left == NULL){
-        retFromRightTree = recurMaxDepth(depth+1,node->right);
-        retFromLeftTree = depth;
-    }else if (node->right == NULL){
-        retFromLeftTree = recurMaxDepth(depth+1,node->left);
-        retFromRightTree = depth;
-    }else{
-        retFromRightTree = recurMaxDepth(depth+1,node->right);
-        retFromLeftTree = recurMaxDepth(depth+1,node->left);
-    }
-    
-    if (retFromLeftTree > retFromRightTree) return retFromLeftTree;
-    else return retFromRightTree;
-}
-
 int maxDepth(struct TreeNode* root) {
     if (root == NULL) return 0;
-    else return recurMaxDepth(1,root);
+    else{
+        int leftRet = maxDepth(root->left);
+        int rightRet = maxDepth(root->right);
+        return (leftRet>rightRet)?leftRet+1:rightRet+1;
+    } 
 }
