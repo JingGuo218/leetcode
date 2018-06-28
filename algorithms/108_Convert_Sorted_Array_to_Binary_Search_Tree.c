@@ -21,7 +21,7 @@ Complexity:
     Time:O(n)
     Space:O(n)
 
-Beats: 21.33% 
+Beats: 100% 
 
 Approach: recursive
 
