@@ -35,38 +35,19 @@ Approach: recursive
  *     struct TreeNode *right;
  * };
  */
-bool recur(struct TreeNode** node,int* nums, int numsSize){
-    
-    if (numsSize == 0) return true;
-    
-    *node = malloc(sizeof(struct TreeNode));
-    (*node)->val = nums[numsSize/2];
-    (*node)->left = NULL;
-    (*node)->right = NULL;
-    
-    printf("%d, %d\n",(*node)->val,numsSize);
+struct TreeNode* FindRoot(int* nums, int start, int end){
+    if (start > end) return NULL;
+    else{
+        struct TreeNode* root = malloc(sizeof(struct TreeNode));
+        int mid=(end+start+1)/2;
+        root->val=nums[mid];
+        root->left=FindRoot(nums,start,mid-1);
+        root->right=FindRoot(nums,mid+1,end);
 
-    return recur(&((*node)->left),&nums[0],numsSize/2)&&
-           recur(&((*node)->right),&nums[numsSize/2+1],numsSize-1-numsSize/2) ;
-
+        return root;
+    }
 }
 
 struct TreeNode* sortedArrayToBST(int* nums, int numsSize) {
-    
-    if(numsSize==0) return NULL;
-    
-    struct TreeNode*  head = malloc(sizeof(struct TreeNode));
-    head->val=nums[numsSize/2];
-    head->left=NULL;
-    head->right=NULL;
-    
-    if(numsSize==1) return head;
-    
-    if ( recur(&head->left,&nums[0],numsSize/2)&&
-         recur(&head->right,&nums[numsSize/2+1],numsSize-1-numsSize/2) ){
-        return head;      
-    }else{
-        return NULL;
-    }
-    
+    return FindRoot(nums,0,numsSize-1);
 }
